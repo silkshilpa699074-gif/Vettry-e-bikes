@@ -1,0 +1,122 @@
+// ===============================
+// VETTRY E-BIKES WEBSITE
+// PREMIUM JAVASCRIPT
+// ===============================
+
+// Sticky Navbar
+window.addEventListener("scroll", function () {
+  const header = document.querySelector("header");
+  if (window.scrollY > 80) {
+    header.style.background = "#000";
+    header.style.boxShadow = "0 5px 25px rgba(0,0,0,.4)";
+  } else {
+    header.style.background = "rgba(0,0,0,.75)";
+    header.style.boxShadow = "none";
+  }
+});
+
+// Smooth Fade Animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll("section").forEach((el) => {
+  observer.observe(el);
+});
+
+// Scroll To Top Button
+const topBtn = document.createElement("button");
+topBtn.innerHTML = "⬆";
+topBtn.className = "topBtn";
+document.body.appendChild(topBtn);
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 500) {
+    topBtn.style.display = "block";
+  } else {
+    topBtn.style.display = "none";
+  }
+});
+
+topBtn.onclick = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
+// Loading Animation
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
+
+// Image Hover Effect
+document.querySelectorAll(".card").forEach((card) => {
+  card.addEventListener("mouseenter", () => {
+    card.style.transform = "translateY(-12px) scale(1.03)";
+  });
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "translateY(0px) scale(1)";
+  });
+});
+
+// Hero Text Animation
+const hero = document.querySelector(".hero-content");
+if (hero) {
+  hero.animate(
+    [
+      {
+        opacity: 0,
+        transform: "translateY(40px)"
+      },
+      {
+        opacity: 1,
+        transform: "translateY(0px)"
+      }
+    ],
+    {
+      duration: 1200,
+      fill: "forwards"
+    }
+  );
+}
+
+// Offer Box Glow
+setInterval(() => {
+  const offerBox = document.querySelector(".offer-box");
+  if (offerBox) {
+    offerBox.classList.toggle("glow");
+  }
+}, 1000);
+
+// EMI Calculator
+function calculateEMI(){
+  let price = Number(document.getElementById("price").value);
+  let down = Number(document.getElementById("down").value);
+  let months = Number(document.getElementById("months").value);
+  
+  if (price && down && months) {
+    let loan = price - down;
+    let emi = loan / months;
+    document.getElementById("result").innerHTML = "Approx EMI : ₹" + emi.toFixed(0) + " / Month";
+  } else {
+    document.getElementById("result").innerHTML = "Please fill all fields";
+  }
+}
+
+// Booking Form Handler
+const bookingForm = document.querySelector(".booking-form");
+if (bookingForm) {
+  bookingForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Thank you! We will contact you soon.");
+    bookingForm.reset();
+  });
+}
+
+// Console Welcome
+console.log("Welcome to Vettry E-Bikes 🚀");
